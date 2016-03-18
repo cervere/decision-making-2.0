@@ -3,7 +3,7 @@
 >>> import numpy as np
 >>> perfs = np.load("Feb_mean_perf_salience_delay_allcues.npy")
 ```
-The stimulus set is the key of to access respective data. The stimuli are...
+The stimulus set is the key to access respective data. The stimuli are...
 ```bash
 "[3, 0]" , "[3, 1]" , "[3, 2]" , "[2, 0]" , "[2, 1]" , "[1, 0]"
 ```
