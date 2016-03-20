@@ -1,29 +1,37 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 
-possible_cues = {"[3, 0]" : "A", "[3, 1]" : "B" , "[3, 2]" : "C", "[2, 0]" : "D", "[2, 1]" : "E", "[1, 0]" : "F"}
+# Dictionnary are not sorted
+possible_cues = {"[3, 0]" : "A / D",
+                 "[3, 1]" : "A / C" ,
+                 "[3, 2]" : "A / B",
+                 "[2, 0]" : "C / D",
+                 "[2, 1]" : "C / B",
+                 "[1, 0]" : "C / D"}
+
+# Sorted list such that they appear in the order want
+cues = ["[3, 0]", "[3, 1]", "[3, 2]",
+        "[2, 0]", "[2, 1]", "[1, 0]"]
 
 
 perfs = np.load("icann_2D_perf_salience_delay_allcues.npy")
+X = np.arange(21)*2
+Y = np.arange(21)*2
 
-saliences = np.arange(21)*2
-delays = np.arange(21)*2
-figs = 0
-fig = plt.figure()
-for c in range(len(possible_cues)):
-    ax = fig.add_subplot(210+(c%2), projection='3d')
-    ax.set_title(possible_cues.keys()[c])
-    ax.set_xlabel("Salience")
+fig = plt.figure(figsize=(11,7))
+for i,cue in enumerate(cues):
+    ax = plt.subplot(2,3,1+i)
+    ax.set_title("Stimuli %s" % possible_cues[cue], x=0.5, y=0.875, color="w", fontsize=14)
+    ax.set_xlabel("Salience (%)")
     ax.set_ylabel("Delay (ms)")
-    ax.set_zlabel("Performance")
-    for i in range(saliences.size):
-        ax.plot(np.zeros(21)+saliences[i], delays, perfs[:][possible_cues.keys()[c]].mean(axis=2)[i,:])
-    for i in range(delays.size):
-        ax.plot(saliences, np.zeros(21)+delays[i], perfs[:][possible_cues.keys()[c]].mean(axis=2)[:,i])
-    if (c+1)%2 == 0:
-        plt.tight_layout()
-        plt.savefig("Icann-2D-salience-delay-"+str(figs)+".pdf", dpi=100)
-        figs += 1
-        fig = plt.figure(figs+1)
+    Z = np.zeros((X.size, Y.size))
+    for j in range(X.size):
+        Z[j] = perfs[:][cue].mean(axis=2)[j,:]
+    levels = 6
+    plt.contourf(X, Y, Z, levels, alpha=.75, cmap=plt.cm.gray, aspect=1)
+    C = plt.contour(X, Y, Z, levels, colors='black', linewidth=.5, aspect=1)
+    plt.clabel(C, inline=1, fontsize=10)
+
+plt.tight_layout()
+plt.savefig("perf-vs-delay-vs-salience.pdf")
 plt.show()
