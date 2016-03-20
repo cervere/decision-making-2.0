@@ -35,7 +35,7 @@ def eachset(cueset, sb):
     i = 0
     plt.figure(1)
     ax = plt.subplot(3,1,sb)
-    ax.set_xlim((0, sals_for_plot[-1]+5))
+    ax.set_xlim((0, sals_for_plot[-1]))
     ax.set_ylim((0, 1.2))
     ax.set_yticks( [0.0, 0.5, 1.0])
     
@@ -58,7 +58,7 @@ def eachset(cueset, sb):
     i = 0
     plt.figure(2)
     ax = plt.subplot(3,1,sb)
-    ax.set_xlim((0, delays[-1]+5))
+    ax.set_xlim((0, delays[-1]))
     ax.set_ylim((0, 1.2))
     ax.set_yticks( [0.0, 0.5, 1.0])
     ax.set_ylabel('Performance', fontsize=12)
@@ -82,12 +82,12 @@ eachset(cue_set2, 2)
 eachset(cue_set3, 3)
 
 plt.figure(1)
-plt.suptitle("Change in performance with relative salience", fontsize=20)
+plt.suptitle("Change in performance with relative salience", fontsize=16)
 #plt.tight_layout()
-plt.xlabel(' Relative difference in salience ', fontsize=12)
+plt.xlabel(' Relative difference in salience (%) ', fontsize=12)
 plt.savefig("perf-vs-salience.pdf", dpi=50)
 plt.figure(2)
-plt.suptitle("Change in performance with delay in presentation", fontsize=20)
+plt.suptitle("Change in performance with delay in presentation", fontsize=16)
 #plt.tight_layout()
 plt.xlabel('Delay(ms) in presentation of higher rewarding cue', fontsize=12)
 plt.savefig("perf-vs-delay.pdf", dpi=100)
