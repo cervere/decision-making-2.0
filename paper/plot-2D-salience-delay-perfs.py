@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 possible_cues = {"[3, 0]" : "A / D",
                  "[3, 1]" : "A / C" ,
                  "[3, 2]" : "A / B",
-                 "[2, 0]" : "C / D",
-                 "[2, 1]" : "C / B",
+                 "[2, 0]" : "B / D",
+                 "[2, 1]" : "B / C",
                  "[1, 0]" : "C / D"}
 
 # Sorted list such that they appear in the order want
@@ -28,8 +28,8 @@ for i,cue in enumerate(cues):
     for j in range(X.size):
         Z[j] = perfs[:][cue].mean(axis=2)[j,:]
     levels = 6
-    plt.contourf(X, Y, Z, levels, alpha=.75, cmap=plt.cm.gray, aspect=1)
-    C = plt.contour(X, Y, Z, levels, colors='black', linewidth=.5, aspect=1)
+    plt.contourf(X, Y, Z, levels, alpha=.75, cmap=plt.cm.gray, aspect=1, vmin=0, vmax=1)
+    C = plt.contour(X, Y, Z, levels, colors='black', linewidth=.5, aspect=1, vmin=0, vmax=1)
     plt.clabel(C, inline=1, fontsize=10)
 
 plt.tight_layout()
