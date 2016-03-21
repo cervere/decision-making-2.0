@@ -1,10 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-all_perf = np.load("Feb_mean_perf_salience_delay_allcues.npy")
+all_perf = np.load("mean_perf_salience_delay_more_allcues.npy")
 saliences = np.arange(36)*7.0/100
 sals_for_plot = saliences*100/7
-delays = np.arange(41)
+delays = np.arange(61)
 
 possible_cues = {"[3, 0]" : "A / D",
                  "[3, 1]" : "A / C" ,
@@ -85,10 +85,10 @@ plt.figure(1)
 plt.suptitle("Change in performance with relative salience", fontsize=16)
 #plt.tight_layout()
 plt.xlabel(' Relative difference in salience (%) ', fontsize=12)
-plt.savefig("perf-vs-salience.pdf", dpi=50)
+plt.savefig("perf-vs-salience-1.pdf", dpi=50)
 plt.figure(2)
 plt.suptitle("Change in performance with delay in presentation", fontsize=16)
 #plt.tight_layout()
 plt.xlabel('Delay(ms) in presentation of higher rewarding cue', fontsize=12)
-plt.savefig("perf-vs-delay.pdf", dpi=100)
+plt.savefig("perf-vs-delay-1.pdf", dpi=100)
 plt.show()
